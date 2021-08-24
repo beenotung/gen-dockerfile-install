@@ -1,0 +1,66 @@
+#!/usr/bin/env node
+
+let fs = require('fs')
+
+let SampleDockerfile = `
+FROM node:stretch-slim
+
+WORKDIR /usr/src/app
+
+RUN npm init --yes
+# RUN npm install --save ...
+COPY package.json .
+RUN npm install
+
+COPY . .
+
+RUN npm run ci
+RUN cp package.json build/
+
+WORKDIR /usr/src/app/build
+
+EXPOSE 8080
+CMD npm run start:prod
+`
+
+switch (process.argv[2]) {
+  case 'init':
+  case '--init':
+    fs.writeFileSync('Dockerfile', SampleDockerfile)
+    process.exit(0)
+}
+
+let pkg = JSON.parse(fs.readFileSync('package.json').toString())
+
+let dockerfileText = fs.readFileSync('Dockerfile').toString()
+let lines = dockerfileText.split('\n')
+
+let initIdx = lines.findIndex(line => line.startsWith('RUN npm init'))
+if (initIdx === -1) {
+  console.error("missing line 'RUN npm init'")
+  process.exit(1)
+}
+
+function addInstall(line) {
+  if (lines.includes(line)) return
+  let copyIdx = lines.indexOf('COPY package.json .', initIdx)
+  if (copyIdx === -1) {
+    console.error("missing line 'COPY package.json .'")
+    process.exit(1)
+  }
+  lines.splice(copyIdx, 0, line)
+  console.log('ADD:', line)
+}
+
+Object.entries(pkg.dependencies || {}).forEach(([name, version]) => {
+  addInstall(`RUN npm install --save ${name}@${version}`)
+})
+
+Object.entries(pkg.devDependencies || {}).forEach(([name, version]) => {
+  addInstall(`RUN npm install --save-dev ${name}@${version}`)
+})
+
+let newDockerfileText = lines.join('\n')
+if (newDockerfileText !== dockerfileText) {
+  fs.writeFileSync('Dockerfile', newDockerfileText)
+}

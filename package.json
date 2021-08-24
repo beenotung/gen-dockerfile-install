@@ -1,0 +1,29 @@
+{
+  "name": "gen-dockerfile-install",
+  "version": "1.0.0",
+  "description": "auto generate npm install script for each dependency in Dockerfile for caching",
+  "keywords": [
+    "Dockerfile",
+    "cache",
+    "codegen",
+    "code generation",
+    "docker",
+    "cli",
+    "bin"
+  ],
+  "bin": {
+    "gen-dockerfile-install": "gen-dockerfile-install"
+  },
+  "author": {
+    "name": "Beeno Tung",
+    "email": "aabbcc1241@yahoo.com.hk",
+    "url": "https://beeno-tung.surge.sh"
+  },
+  "license": "BSD-2-Clause",
+  "devDependencies": {
+    "@types/node": "^16.7.1",
+    "ts-node": "^10.2.1",
+    "ts-node-dev": "^1.1.8",
+    "typescript": "^4.3.5"
+  }
+}
