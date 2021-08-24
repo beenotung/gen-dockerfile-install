@@ -1,6 +1,6 @@
 {
   "name": "gen-dockerfile-install",
-  "version": "1.0.0",
+  "version": "1.0.1",
   "description": "auto generate npm install script for each dependency in Dockerfile for caching",
   "keywords": [
     "Dockerfile",
