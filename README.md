@@ -2,7 +2,7 @@
 
 auto generate npm install script for each dependency in Dockerfile for caching
 
-[![npm Package Version](https://img.shields.io/npm/v/@beenotung/tslib.svg?maxAge=3600)](https://www.npmjs.com/package/@beenotung/tslib)
+[![npm Package Version](https://img.shields.io/npm/v/gen-dockerfile-install.svg?maxAge=3600)](https://www.npmjs.com/package/gen-dockerfile-install)
 
 ## Usage Example
 ```shell
