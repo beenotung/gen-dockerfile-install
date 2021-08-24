@@ -14,16 +14,20 @@
   "bin": {
     "gen-dockerfile-install": "gen-dockerfile-install"
   },
-  "author": {
-    "name": "Beeno Tung",
-    "email": "aabbcc1241@yahoo.com.hk",
-    "url": "https://beeno-tung.surge.sh"
-  },
+  "author": "Beeno Tung <aabbcc1241@yahoo.com.hk> (https://beeno-tung.surge.sh)",
   "license": "BSD-2-Clause",
   "devDependencies": {
     "@types/node": "^16.7.1",
     "ts-node": "^10.2.1",
     "ts-node-dev": "^1.1.8",
     "typescript": "^4.3.5"
-  }
+  },
+  "repository": {
+    "type": "git",
+    "url": "git+https://github.com/beenotung/gen-dockerfile-install.git"
+  },
+  "bugs": {
+    "url": "https://github.com/beenotung/gen-dockerfile-install/issues"
+  },
+  "homepage": "https://github.com/beenotung/gen-dockerfile-install#readme"
 }
