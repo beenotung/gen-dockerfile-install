@@ -4,6 +4,15 @@ auto generate npm install script for each dependency in Dockerfile for caching
 
 [![npm Package Version](https://img.shields.io/npm/v/gen-dockerfile-install.svg?maxAge=3600)](https://www.npmjs.com/package/gen-dockerfile-install)
 
+## Installation
+```bash
+npm i -g gen-dockerfile-install
+```
+
+You can install it with npm directly (no need to reach for yarn or pnpm because this package does not depend on other packages).
+
+If you do not prefer to install it globally, you can run it with `npx gen-dockerfile-install`, which will download and execute it without installation.
+
 ## Usage Example
 ```bash
 # init the Dockerfile
