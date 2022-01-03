@@ -20,6 +20,9 @@ If you do not prefer to install it globally, you can run it with `npx gen-docker
 
 # update Dockerfile according to the dependency list in package.json
 > gen-dockerfile-install
+
+# install new packages in batch
+> COMPACT_INSTALL=true gen-dockerfile-install
 ```
 
 ## License

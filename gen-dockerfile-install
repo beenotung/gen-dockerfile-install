@@ -52,13 +52,29 @@ function addInstall(line) {
   console.log('ADD:', line)
 }
 
-Object.entries(pkg.dependencies || {}).forEach(([name, version]) => {
-  addInstall(`RUN npm install --save ${name}@${version}`)
-})
+function addDeps(cmd, deps) {
+  deps = deps.filter(dep => !dockerfileText.includes(dep))
+  if (deps.length == 0) return
+  if (process.env.COMPACT_INSTALL == 'true') {
+    addInstall(cmd + ' ' + deps.join(' '))
+  } else {
+    deps.forEach(dep => addInstall(cmd + ' ' + dep))
+  }
+}
 
-Object.entries(pkg.devDependencies || {}).forEach(([name, version]) => {
-  addInstall(`RUN npm install --save-dev ${name}@${version}`)
-})
+addDeps(
+  'RUN npm install --save',
+  Object.entries(pkg.dependencies || {}).map(
+    ([name, version]) => name + '@' + version,
+  ),
+)
+
+addDeps(
+  'RUN npm install --save-dev',
+  Object.entries(pkg.devDependencies || {}).map(
+    ([name, version]) => name + '@' + version,
+  ),
+)
 
 let newDockerfileText = lines.join('\n')
 if (newDockerfileText !== dockerfileText) {
